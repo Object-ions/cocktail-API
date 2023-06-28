@@ -17,8 +17,15 @@ ApiRequest.send()
 
       for (let i = 0; i <= 15; i++) {
 
-        if (response.drinks[0][`strIngredient${i + 1}`] === null) {
+        if ((response.drinks[0][`strIngredient${i + 1}`] === null || response.drinks[0][`strIngredient${i + 1}`] === ' ') && (response.drinks[0][`strMeasure${i + 1}`] === null || response.drinks[0][`strMeasure${i + 1}`] === ' ')) {
           return;
+
+        } else if (response.drinks[0][`strMeasure${i + 1}`] === null || response.drinks[0][`strMeasure${i + 1}`] === ' ') {
+          arrayMeasure[i] = ' ';
+
+        } else if (response.drinks[0][`strIngredient${i + 1}`] === null || response.drinks[0][`strIngredient${i + 1}`] === ' ') {
+          arrayIng[i] = ' ';
+
         } else {
           arrayIng.push(response.drinks[0][`strIngredient${i + 1}`]);
           arrayMeasure.push(response.drinks[0][`strMeasure${i + 1}`]);
@@ -34,12 +41,10 @@ ApiRequest.send()
           //append ul to the DOM
           document.body.appendChild(ul)
         };
-        //Until here for loop
-      }
 
+        //until here event listener
+      };
 
-      //until here event listener
+      //until here ApiRequest
     });
-
-    //until here ApiRequest
   });

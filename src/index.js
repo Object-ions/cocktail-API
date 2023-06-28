@@ -1,43 +1,47 @@
 import '../css/styles.css';
-import WeatherService from './weather-service.js'
+import ApiRequest from './ApiRequest.js'
 
+ApiRequest.send()
+  .then(response => {
+    console.log(response);
 
-// UI Logic
+    const button = document.querySelector('#button');
+    const img = document.querySelector('img');
 
-function handleFormSubmission(event) {
-  event.preventDefault();
-  const city = document.querySelector('#location').value;
-  document.querySelector('#location').value = null;
-  let promise = WeatherService.getWeather(city);
-  promise.then(function (weatherDataArray) {
-    printElements(weatherDataArray);
-  }, function (errorArray) {
-    printError(errorArray);
+    button.addEventListener('click', function () {
+      document.querySelector('#cocktail-name').innerHTML = `${response.drinks[0].strDrink}`;
+
+      img.src = `${response.drinks[0].strDrinkThumb}`;
+
+      document.querySelector('#cocktail-ingridiants').innerHTML = `${response.drinks[0].strMeasure1}: of ${response.drinks[0].strIngredient1}`;
+
+      let arrayIng = [];
+      for (let i = 0; i <= 15; i++) {
+
+        if (response.drinks[0][`strIngredient${i + 1}`] === null) {
+          console.log('error line 22');
+        } else {
+          arrayIng.push(response.drinks[0][`strIngredient${i + 1}`])
+          console.log(arrayIng[i]);
+        }
+        //Until here for loop
+      }
+
+      let arrayMeasure = [];
+      console.log(arrayMeasure);
+      for (let i = 0; i <= 15; i++) {
+
+        if (response.drinks[0][`strMeasure${i + 1}`] === null) {
+          return;
+        } else {
+          arrayMeasure.push(response.drinks[0][`strMeasure${i + 1}`])
+          console.log(arrayMeasure[i]);
+        }
+        //Until here for loop
+      }
+
+      //until here event listener
+    });
+
+    //until here ApiRequest
   });
-}
-
-function printElements(data) {
-  document.querySelector('#showResponse').innerText = `The humidity in ${data[1]} is ${data[0].main.humidity}%.
-  The temperature in Kelvins is ${data[0].main.temp} degrees.`;
-}
-
-function printError(error) {
-  document.querySelector('#showResponse').innerText = `There was an error accessing the weather data for ${error[2]}: ${error[0].status} ${error[0].statusText}: ${error[1].message}`;
-}
-
-window.addEventListener("load", function () {
-  document.querySelector('form').addEventListener("submit", handleFormSubmission);
-});
-
-// function handleFormSubmission(event) {
-//   event.preventDefault();
-
-//   const city = document.querySelector('#city').value;
-//   const state = document.querySelector('#state').value;
-//   const country = document.querySelector('#country').value
-
-//   document.querySelector('#city').value = null;
-//   document.querySelector('#state').value = null;
-//   document.querySelector('#country').value = null;
-//   getWeather(city, state, country);
-// }

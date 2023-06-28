@@ -7,38 +7,36 @@ ApiRequest.send()
 
     const button = document.querySelector('#button');
     const img = document.querySelector('img');
+    let arrayIng = [];
+    let arrayMeasure = []
 
     button.addEventListener('click', function () {
       document.querySelector('#cocktail-name').innerHTML = `${response.drinks[0].strDrink}`;
 
       img.src = `${response.drinks[0].strDrinkThumb}`;
 
-      document.querySelector('#cocktail-ingridiants').innerHTML = `${response.drinks[0].strMeasure1}: of ${response.drinks[0].strIngredient1}`;
-
-      let arrayIng = [];
       for (let i = 0; i <= 15; i++) {
 
         if (response.drinks[0][`strIngredient${i + 1}`] === null) {
-          console.log('error line 22');
-        } else {
-          arrayIng.push(response.drinks[0][`strIngredient${i + 1}`])
-          console.log(arrayIng[i]);
-        }
-        //Until here for loop
-      }
-
-      let arrayMeasure = [];
-      console.log(arrayMeasure);
-      for (let i = 0; i <= 15; i++) {
-
-        if (response.drinks[0][`strMeasure${i + 1}`] === null) {
           return;
         } else {
-          arrayMeasure.push(response.drinks[0][`strMeasure${i + 1}`])
-          console.log(arrayMeasure[i]);
-        }
+          arrayIng.push(response.drinks[0][`strIngredient${i + 1}`]);
+          arrayMeasure.push(response.drinks[0][`strMeasure${i + 1}`]);
+          //create li
+          let li = [];
+          li[i] = document.createElement('li');
+          //set the value of the li
+          li[i].innerText = arrayMeasure[i] + ': of ' + arrayIng[i];
+          //create an ul tag
+          let ul = document.createElement('ul');
+          //append li to ul
+          ul.appendChild(li[i])
+          //append ul to the DOM
+          document.body.appendChild(ul)
+        };
         //Until here for loop
       }
+
 
       //until here event listener
     });

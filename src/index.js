@@ -1,19 +1,25 @@
 import '../css/styles.css';
 import ApiRequest from './ApiRequest.js'
 
-ApiRequest.send()
-  .then(response => {
-    console.log(response);
 
-    const button = document.querySelector('#button');
-    const img = document.querySelector('img');
-    let arrayIng = [];
-    let arrayMeasure = []
+const button = document.querySelector('#button');
 
-    button.addEventListener('click', function () {
+button.addEventListener('click', function () {
+
+  ApiRequest.send()
+    .then(response => {
+      console.log(response);
+
+      const img = document.querySelector('img');
+      let arrayIng = [];
+      let arrayMeasure = [];
+
       document.querySelector('#cocktail-name').innerHTML = `${response.drinks[0].strDrink}`;
 
       img.src = `${response.drinks[0].strDrinkThumb}`;
+
+      //create an ul tag
+      let ul = document.createElement('ul')
 
       for (let i = 0; i <= 15; i++) {
 
@@ -34,17 +40,12 @@ ApiRequest.send()
           li[i] = document.createElement('li');
           //set the value of the li
           li[i].innerText = arrayMeasure[i] + ': of ' + arrayIng[i];
-          //create an ul tag
-          let ul = document.createElement('ul');
           //append li to ul
           ul.appendChild(li[i])
           //append ul to the DOM
-          document.body.appendChild(ul)
-        };
-
-        //until here event listener
-      };
-
-      //until here ApiRequest
+          let displayIng = document.querySelector('#cocktail-ingridiants');
+          displayIng.appendChild(ul);
+        }
+      }
     });
-  });
+});

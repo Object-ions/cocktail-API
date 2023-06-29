@@ -5,25 +5,32 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Coctails Finder</h1>
-    <p></p>
+  <!----------- Header -------------->
+  <div id="header" class="container">
+    <h1>Cocktail Finder</h1>
   </div>
-  <div id="selection">
-    <div>
-      <p>Type the first letter of the coctail for sreach ot leave blank if your'e feeling frisky</p>
-      <input type="text"> <br>
+
+  <!----------- Choose section -------------->
+  <div class="container" id="selection">
+    <div class="container">
+      <p>Type the first letter of the cocktail for search or leave blank if your'e feeling frisky</p>
+      <input id="input" type="text"> <br>
       <button id="button">Find Me a Cocktail</button>
     </div>
-    <!-- Diaplay results -->
-    <div id="display-results">
-      <h3 id="cocktail-name"></h3>
+  </div>
 
-      <img>
+  <div>
+    <!----------- Random -------------->
+    <div class="container">
+      <div class="hidden" id="display-results">
+        <h3 id="cocktail-name"></h3>
 
-      <!-- ingridiants -->
-      <div id="cocktail-ingridiants"></div>
+        <img>
+
+        <div id="cocktail-ingridiants"></div>
+      </div>
     </div>
+
   </div>
 </body>
 

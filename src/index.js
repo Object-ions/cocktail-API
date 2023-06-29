@@ -4,7 +4,12 @@ import ApiRequest from './ApiRequest.js'
 
 const button = document.querySelector('#button');
 
+
+
 button.addEventListener('click', function () {
+  let ul = document.createElement('ul')
+  let displayIng = document.querySelector('#cocktail-ingridiants');
+  displayIng.appendChild(ul)
 
   ApiRequest.send()
     .then(response => {
@@ -14,12 +19,14 @@ button.addEventListener('click', function () {
       let arrayIng = [];
       let arrayMeasure = [];
 
+      let displayDiv = document.querySelector('#display-results');
+      displayDiv.classList.remove('hidden');
+
       document.querySelector('#cocktail-name').innerHTML = `${response.drinks[0].strDrink}`;
 
       img.src = `${response.drinks[0].strDrinkThumb}`;
 
-      //create an ul tag
-      let ul = document.createElement('ul')
+      // ul.innerHTML = '';
 
       for (let i = 0; i <= 15; i++) {
 
@@ -39,12 +46,9 @@ button.addEventListener('click', function () {
           let li = [];
           li[i] = document.createElement('li');
           //set the value of the li
-          li[i].innerText = arrayMeasure[i] + ': of ' + arrayIng[i];
+          li[i].innerText = arrayMeasure[i] + ' ' + arrayIng[i];
           //append li to ul
           ul.appendChild(li[i])
-          //append ul to the DOM
-          let displayIng = document.querySelector('#cocktail-ingridiants');
-          displayIng.appendChild(ul);
         }
       }
     });

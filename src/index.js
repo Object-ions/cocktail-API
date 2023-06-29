@@ -4,13 +4,9 @@ import ApiRequest from './ApiRequest.js'
 
 const button = document.querySelector('#button');
 
-
-
 button.addEventListener('click', function () {
-  let ul = document.createElement('ul')
-  let displayIng = document.querySelector('#cocktail-ingridiants');
-  displayIng.appendChild(ul)
-
+  let ul = document.querySelector('#cocktail-ingridiants');
+  ul.innerText = '';
   ApiRequest.send()
     .then(response => {
       console.log(response);
@@ -26,7 +22,7 @@ button.addEventListener('click', function () {
 
       img.src = `${response.drinks[0].strDrinkThumb}`;
 
-      // ul.innerHTML = '';
+      ul.innerHTML = '';
 
       for (let i = 0; i <= 15; i++) {
 

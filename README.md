@@ -1,4 +1,4 @@
-# (Cocktail Finder)
+# Cocktail Finder
 
 #### (Cocktail Finder is a fun, easy-to-use web application that allows users to discover new cocktails with a single click. It leverages the CocktailDB API to retrieve a random cocktail, along with its ingredients and preparation instructions, and then displays this information in a neat, user-friendly layout.)
 

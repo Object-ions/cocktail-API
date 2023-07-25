@@ -30,7 +30,7 @@ styles.css: This file includes all the necessary styling for the web application
 1. Clone the repository
 
 ```bash
-$ git clone https://github.com/Object-ions/Currency-Exchanger
+$ git clone https://github.com/Object-ions/cocktail-API.git
 $ cd currency-converter
 ```
 
